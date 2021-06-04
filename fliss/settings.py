@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_bootstrap5',
     'guardian',
+    # 'groups_manager',
     'thumbnails',
     'taggit',
     'taggit_serializer',
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     'apps.profiles',
     'apps.notes',
     'apps.likes',
+    'apps.organizations',
     'apps.agents',
     'apps.groups',
 ]
@@ -68,10 +71,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'fliss.urls'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # default
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
